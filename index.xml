@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>CJ&#39;s Blog</title>
+    <link>https://cjraft.github.io/</link>
+    <description>Recent content on CJ&#39;s Blog</description>
+    <generator>Hugo -- 0.146.0</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 09 Mar 2026 15:00:00 +0800</lastBuildDate>
+    <atom:link href="https://cjraft.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AI 资讯速递（2026年3月9日）</title>
+      <link>https://cjraft.github.io/news/2026-03-09/</link>
+      <pubDate>Mon, 09 Mar 2026 15:00:00 +0800</pubDate>
+      <guid>https://cjraft.github.io/news/2026-03-09/</guid>
+      <description>2026年3月9日：智能体首次写入政府工作报告、阿里千问负责人离职、工信部推动人工智能&#43;制造、美国拟扩展AI芯片出口管制全球。</description>
+    </item>
+    <item>
+      <title>AI 编码 Agent 实战全攻略：CLI 工具与异步任务 (2026)</title>
+      <link>https://cjraft.github.io/articles/ai-coding-agent-cli-2026/</link>
+      <pubDate>Mon, 09 Mar 2026 11:00:00 +0800</pubDate>
+      <guid>https://cjraft.github.io/articles/ai-coding-agent-cli-2026/</guid>
+      <description>2026 年 AI 编码工具已经从 IDE 自动补全进化到 CLI Agent 和异步任务 Agent。本文全面对比 Claude Code、Codex CLI、Cline、GitHub Copilot Agent 等主流工具，深入解析 MCP 生态和 Subagent 机制，提供完整的选型指南与实战工作流。</description>
+    </item>
+    <item>
+      <title>AI 资讯速递（2026年3月8日）</title>
+      <link>https://cjraft.github.io/news/2026-03-08/</link>
+      <pubDate>Sun, 08 Mar 2026 09:00:00 +0800</pubDate>
+      <guid>https://cjraft.github.io/news/2026-03-08/</guid>
+      <description>2026年3月8日：IBM发布2026年AI趋势18大预测、微软研究院展望AI未来、量子计算将超越传统计算机、智能体互操作标准推进。</description>
+    </item>
+    <item>
+      <title>AI 驱动的软件测试实战指南：2026 年工具与实践</title>
+      <link>https://cjraft.github.io/articles/ai-software-testing-2026/</link>
+      <pubDate>Sun, 08 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>https://cjraft.github.io/articles/ai-software-testing-2026/</guid>
+      <description>AI 测试工具正在从实验性功能演变为关键基础设施。2026 年，AI 如何改变测试用例生成、执行和维护？本文介绍主流工具、实战方案以及引入 AI 测试的完整路径。</description>
+    </item>
+    <item>
+      <title>AI 资讯速递（2026年3月7日）</title>
+      <link>https://cjraft.github.io/news/2026-03-07/</link>
+      <pubDate>Sat, 07 Mar 2026 20:00:00 +0800</pubDate>
+      <guid>https://cjraft.github.io/news/2026-03-07/</guid>
+      <description>2026年3月7日：特朗普封杀Anthropic、OpenAI发布GPT-5.4、Claude Code新技能、智能经济新形态首入政府工作报告。</description>
+    </item>
+    <item>
+      <title>Claude Code 语音编程：编程进入「对讲机」时代</title>
+      <link>https://cjraft.github.io/articles/claude-code-voice-programming/</link>
+      <pubDate>Sat, 07 Mar 2026 11:00:00 +0800</pubDate>
+      <guid>https://cjraft.github.io/articles/claude-code-voice-programming/</guid>
+      <description>2026年3月，Anthropic 为 Claude Code 推出语音编程模式。长按空格说话，松开即完成输入——编程正在从键盘迁移到语音。本文深入解析这一交互革命的本质与未来影响。</description>
+    </item>
+    <item>
+      <title>AI 资讯速递（2026年3月6日）</title>
+      <link>https://cjraft.github.io/news/2026-03-06/</link>
+      <pubDate>Fri, 06 Mar 2026 09:00:00 +0800</pubDate>
+      <guid>https://cjraft.github.io/news/2026-03-06/</guid>
+      <description>2026年3月6日：两会AI提案、量子计算突破、具身智能、全球AI治理。</description>
+    </item>
+    <item>
+      <title>Claude Computer Use 深度解析：AI 如何学会操控电脑</title>
+      <link>https://cjraft.github.io/articles/computer-use-deep-dive/</link>
+      <pubDate>Fri, 06 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>https://cjraft.github.io/articles/computer-use-deep-dive/</guid>
+      <description>Claude Computer Use 让 AI 直接操控电脑成为现实。本文深入解析这项技术的工作原理，并提供详细的上手指南和代码示例。</description>
+    </item>
+    <item>
+      <title>AI 资讯速递（2026年3月5日）</title>
+      <link>https://cjraft.github.io/news/2026-03-05/</link>
+      <pubDate>Thu, 05 Mar 2026 09:32:00 +0800</pubDate>
+      <guid>https://cjraft.github.io/news/2026-03-05/</guid>
+      <description>2026年3月5日：国家级标准发布、资本动态、AI硬件、应用落地。</description>
+    </item>
+    <item>
+      <title>2026 年 AI 技术趋势：从工程视角看真正重要的变化</title>
+      <link>https://cjraft.github.io/articles/ai-trends-2026/</link>
+      <pubDate>Thu, 05 Mar 2026 09:00:00 +0800</pubDate>
+      <guid>https://cjraft.github.io/articles/ai-trends-2026/</guid>
+      <description>2026 年 AI 的发展走向何方？褪去营销包装后，真正改变工程实践的技术趋势是什么？从推理模型到 Agent 基础设施，本文从技术视角梳理值得关注的方向。</description>
+    </item>
+    <item>
+      <title>用 Tiny Stable Diffusion &#43; Pillow 生成带文字的 AI 封面图</title>
+      <link>https://cjraft.github.io/articles/ai-cover-image-generator/</link>
+      <pubDate>Thu, 05 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>https://cjraft.github.io/articles/ai-cover-image-generator/</guid>
+      <description>所有 AI 图片产品的通用方案：用 Tiny SD 生成背景，再用 Pillow 精确渲染文字。本文完整实现这套流程，一条命令生成可直接用于博客的封面图。</description>
+    </item>
+    <item>
+      <title>AI Agent 工程实践：从 ReAct 到多智能体协作</title>
+      <link>https://cjraft.github.io/articles/agent-intro/</link>
+      <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>https://cjraft.github.io/articles/agent-intro/</guid>
+      <description>AI Agent 是能够自主规划、调用工具、执行多步任务的 AI 系统。本文从 ReAct 模式出发，介绍 Agent 的核心架构与工程实现，包括工具调用、记忆管理和多 Agent 协作。</description>
+    </item>
+    <item>
+      <title>AI 资讯速递（2026年3月第1周）</title>
+      <link>https://cjraft.github.io/news/2026-03-01/</link>
+      <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>https://cjraft.github.io/news/2026-03-01/</guid>
+      <description>2026年3月第1周 AI 行业重大动态：Claude Code 语音模式、GPT-5.4 泄露、多模态突破……</description>
+    </item>
+    <item>
+      <title>MCP 协议深度解析：给 AI 接上真实世界的标准接口</title>
+      <link>https://cjraft.github.io/articles/mcp-intro/</link>
+      <pubDate>Wed, 25 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://cjraft.github.io/articles/mcp-intro/</guid>
+      <description>MCP（Model Context Protocol）是 Anthropic 在 2024 年底推出的开放协议，旨在标准化 AI 模型与外部工具之间的通信。本文深入解析 MCP 架构设计与实现方法。</description>
+    </item>
+    <item>
+      <title>RAG 系统从零构建：原理、实现与工程化</title>
+      <link>https://cjraft.github.io/articles/rag-intro/</link>
+      <pubDate>Fri, 20 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://cjraft.github.io/articles/rag-intro/</guid>
+      <description>RAG（检索增强生成）是当前构建知识库问答系统的主流方案。本文深入讲解 RAG 的核心原理、完整实现以及工程化要点。</description>
+    </item>
+    <item>
+      <title>关于本站</title>
+      <link>https://cjraft.github.io/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://cjraft.github.io/about/</guid>
+      <description>about</description>
+    </item>
+  </channel>
+</rss>
