@@ -5,3 +5,6 @@ public/
 resources/_gen/
 .hugo_build.lock
 .scripts/*
+
+# agent tasks
+tasks

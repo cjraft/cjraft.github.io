@@ -25,4 +25,4 @@ summary: "about"
 
 ByteDance 程序员，聚焦 AI Coding。
 
-- GitHub：[github.com/PengJiyuan](https://github.com/PengJiyuan)
+- GitHub：[github.com/PengJiyuan](https://github.com/cjraft)
