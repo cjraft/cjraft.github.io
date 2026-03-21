@@ -16,7 +16,7 @@ minify:
   minifyOutput: true
 
 pagination:
-  pagerSize: 12
+  pagerSize: 20
 
 params:
   env: production

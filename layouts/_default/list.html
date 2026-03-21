@@ -100,20 +100,33 @@
 <footer class="page-footer">
   <nav class="pagination">
     {{- if $paginator.HasPrev }}
-    <a class="prev" href="{{ $paginator.Prev.URL | absURL }}">
-      «&nbsp;{{ i18n "prev_page" }}&nbsp;
-      {{- if (.Param "ShowPageNums") }}
-      {{- sub $paginator.PageNumber 1 }}/{{ $paginator.TotalPages }}
+    <a class="prev" href="{{ $paginator.Prev.URL | relURL }}">«</a>
+    {{- end }}
+    {{- $currentPage := $paginator.PageNumber }}
+    {{- $totalPages := $paginator.TotalPages }}
+    {{- $prevShown := 0 }}
+    {{- range $paginator.Pagers }}
+      {{- $pageNum := .PageNumber }}
+      {{- $show := false }}
+      {{- if or (eq $pageNum 1) (eq $pageNum $totalPages) }}
+        {{- $show = true }}
+      {{- else if and (ge $pageNum (sub $currentPage 2)) (le $pageNum (add $currentPage 2)) }}
+        {{- $show = true }}
       {{- end }}
-    </a>
+      {{- if $show }}
+        {{- if and (gt $prevShown 0) (gt (sub $pageNum $prevShown) 1) }}
+        <span class="page-dots">…</span>
+        {{- end }}
+        {{- if eq $pageNum $currentPage }}
+        <span class="page-current">{{ $pageNum }}</span>
+        {{- else }}
+        <a href="{{ .URL | relURL }}">{{ $pageNum }}</a>
+        {{- end }}
+        {{- $prevShown = $pageNum }}
+      {{- end }}
     {{- end }}
     {{- if $paginator.HasNext }}
-    <a class="next" href="{{ $paginator.Next.URL | absURL }}">
-      {{- i18n "next_page" }}&nbsp;
-      {{- if (.Param "ShowPageNums") }}
-      {{- add 1 $paginator.PageNumber }}/{{ $paginator.TotalPages }}
-      {{- end }}&nbsp;»
-    </a>
+    <a class="next" href="{{ $paginator.Next.URL | relURL }}">»</a>
     {{- end }}
   </nav>
 </footer>

@@ -1,0 +1,50 @@
+/* Numbered pagination */
+.pagination {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+
+.pagination a,
+.pagination .page-current,
+.pagination .page-dots {
+    color: var(--secondary);
+    font-size: 15px;
+    line-height: 36px;
+    border-radius: 4px;
+    padding: 0 10px;
+    text-decoration: none;
+    min-width: 32px;
+    text-align: center;
+    display: inline-block;
+    background: transparent;
+}
+
+.pagination a:hover {
+    color: var(--primary);
+    background: var(--code-bg);
+}
+
+.pagination .page-current {
+    color: var(--primary);
+    font-weight: 600;
+    background: var(--code-bg);
+    cursor: default;
+}
+
+.pagination .page-dots {
+    color: var(--secondary);
+    cursor: default;
+    padding: 0 4px;
+    min-width: auto;
+}
+
+.pagination .prev,
+.pagination .next {
+    font-size: 18px;
+}
+
+.pagination .next {
+    margin-inline-start: 0;
+}
