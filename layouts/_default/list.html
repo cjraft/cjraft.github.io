@@ -92,7 +92,7 @@
   </div>
   {{- /* 封面图（右侧） - 已禁用 */}}
   {{- /* partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden) */}}
-  <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
+  <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .RelPermalink }}"></a>
 </article>
 {{- end }}
 
