@@ -48,3 +48,14 @@
 .pagination .next {
     margin-inline-start: 0;
 }
+
+.post-content .mermaid {
+    display: flex;
+    justify-content: center;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    padding: 1rem;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--entry);
+}

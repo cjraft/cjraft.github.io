@@ -1,0 +1,46 @@
+{{- /* Head custom content area start */ -}}
+{{- if and .IsPage (findRE "```mermaid" .RawContent 1) }}
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+
+  mermaid.initialize({
+    startOnLoad: false,
+    securityLevel: 'loose',
+    theme: document.documentElement.dataset.theme === 'dark' ? 'dark' : 'default',
+    fontFamily: 'inherit'
+  });
+
+  async function renderMermaid() {
+    const sourceBlocks = document.querySelectorAll('pre[data-mermaid="true"], pre code.language-mermaid');
+    if (!sourceBlocks.length) return;
+
+    const nodes = [];
+    sourceBlocks.forEach((sourceBlock, index) => {
+      const pre = sourceBlock.matches('pre') ? sourceBlock : sourceBlock.parentElement;
+      if (!pre || pre.dataset.mermaidProcessed === 'true') return;
+
+      const container = document.createElement('div');
+      container.className = 'mermaid';
+      container.id = `mermaid-${index}`;
+      container.textContent = pre.textContent.trim();
+
+      pre.replaceWith(container);
+      nodes.push(container);
+      container.dataset.mermaidProcessed = 'true';
+    });
+
+    if (nodes.length) {
+      await mermaid.run({ nodes });
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      renderMermaid().catch(console.error);
+    }, { once: true });
+  } else {
+    renderMermaid().catch(console.error);
+  }
+</script>
+{{- end }}
+{{- /* Head custom content area end */ -}}
