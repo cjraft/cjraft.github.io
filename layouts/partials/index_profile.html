@@ -1,31 +1,4 @@
 <div class="profile">
-    <!-- 手绘装饰元素 -->
-    <div class="hand-drawn-decoration">
-        <svg class="doodle-star" style="top: 15%; left: 8%; animation-delay: 0s;" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2L14.09 8.26L20.18 9.27L15.54 13.14L16.82 19.14L12 16.18L7.18 19.14L8.46 13.14L3.82 9.27L9.91 8.26L12 2Z" stroke="#FF9A8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="rgba(255,154,139,0.2)"/>
-        </svg>
-        <svg class="doodle-star" style="top: 25%; right: 12%; animation-delay: 0.5s; width: 18px; height: 18px;" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2L14.09 8.26L20.18 9.27L15.54 13.14L16.82 19.14L12 16.18L7.18 19.14L8.46 13.14L3.82 9.27L9.91 8.26L12 2Z" stroke="#A8D4E6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="rgba(168,212,230,0.3)"/>
-        </svg>
-        <svg class="doodle-star" style="bottom: 30%; left: 15%; animation-delay: 1s; width: 16px; height: 16px;" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2L14.09 8.26L20.18 9.27L15.54 13.14L16.82 19.14L12 16.18L7.18 19.14L8.46 13.14L3.82 9.27L9.91 8.26L12 2Z" stroke="#FFE4A1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="rgba(255,228,161,0.4)"/>
-        </svg>
-        
-        <!-- 波浪线装饰 -->
-        <svg class="wavy-decoration" style="top: 20%; right: 5%;" viewBox="0 0 100 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 10 Q 25 0, 50 10 T 100 10" stroke="#FF9A8B" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.4"/>
-        </svg>
-        <svg class="wavy-decoration" style="bottom: 25%; left: 5%; width: 80px;" viewBox="0 0 100 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 10 Q 25 0, 50 10 T 100 10" stroke="#A8C5A8" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.4"/>
-        </svg>
-        
-        <!-- 圆点装饰 -->
-        <div class="dot-decoration" style="top: 30%; left: 5%; width: 10px; height: 10px; background: #FF9A8B;"></div>
-        <div class="dot-decoration" style="top: 35%; left: 7%; width: 6px; height: 6px; background: #FFE4A1;"></div>
-        <div class="dot-decoration" style="bottom: 35%; right: 8%; width: 8px; height: 8px; background: #A8D4E6;"></div>
-        <div class="dot-decoration" style="bottom: 40%; right: 6%; width: 5px; height: 5px; background: #D4C5E8;"></div>
-    </div>
-
     {{- with site.Params.profileMode }}
     <div class="profile_inner">
         <!-- 3D Voxel Dog Container -->
@@ -46,22 +19,27 @@
         {{- partial "social_icons.html" -}}
 
         {{- with .buttons }}
-        <div class="buttons">
-            {{- range . }}
-            <a class="button{{ if .class }} {{ .class }}{{ end }}" href="{{ trim .url " " }}" rel="noopener" title="{{ .name }}">
-                <span class="button-inner">
-                    {{ .name }}
-                    {{- if (findRE "://" .url) }}&nbsp;
-                    <svg fill="none" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
-                        stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" height="14" width="14">
-                        <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path>
-                        <path d="M15 3h6v6"></path>
-                        <path d="M10 14L21 3"></path>
-                    </svg>
-                    {{- end }}
-                </span>
-            </a>
-            {{- end }}
+        <div class="buttons-wrapper">
+            <!-- 橙色箭头 - 从自我介绍指向每日资讯 -->
+            <img src="/images/orange-arrow.svg" class="orange-arrow" alt="arrow" width="64" height="127">
+            
+            <div class="buttons">
+                {{- range . }}
+                <a class="button{{ if .class }} {{ .class }}{{ end }}" href="{{ trim .url " " }}" rel="noopener" title="{{ .name }}">
+                    <span class="button-inner">
+                        {{ .name }}
+                        {{- if (findRE "://" .url) }}&nbsp;
+                        <svg fill="none" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
+                            stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" height="14" width="14">
+                            <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path>
+                            <path d="M15 3h6v6"></path>
+                            <path d="M10 14L21 3"></path>
+                        </svg>
+                        {{- end }}
+                    </span>
+                </a>
+                {{- end }}
+            </div>
         </div>
         {{- end }}
     </div>
@@ -187,5 +165,33 @@
 
 @keyframes spin {
     to { transform: rotate(360deg); }
+}
+
+/* 按钮和箭头容器 */
+.buttons-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* 橙色箭头样式 */
+.orange-arrow {
+    position: absolute;
+    right: -20px;
+    top: -110px;
+    width: 64px;
+    height: 127px;
+    transform: rotate(-15deg);
+    opacity: 0.9;
+    pointer-events: none;
+    z-index: 1;
+}
+
+@media (max-width: 768px) {
+    .orange-arrow {
+        display: none;
+    }
 }
 </style>
