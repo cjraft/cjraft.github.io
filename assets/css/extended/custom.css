@@ -466,7 +466,8 @@ body {
 .post-entry:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-hover);
-  border-color: var(--text-primary);
+  border-style: dashed;
+  border-color: var(--text-light);
 }
 
 .entry-header h2 {
@@ -1000,8 +1001,9 @@ body {
 }
 
 .search-box input:focus {
-  border-color: var(--text-primary);
-  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1);
+  border-style: dashed;
+  border-color: var(--text-light);
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.05);
 }
 
 .search-box::before {

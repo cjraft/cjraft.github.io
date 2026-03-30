@@ -176,14 +176,14 @@
     margin-top: 20px;
 }
 
-/* 橙色箭头样式 */
+/* 橙色箭头样式 - 镜像到左边指向"浏览文章" */
 .orange-arrow {
     position: absolute;
-    right: -20px;
+    left: -20px;
     top: -110px;
     width: 64px;
     height: 127px;
-    transform: rotate(-15deg);
+    transform: scaleX(-1) rotate(-15deg);
     opacity: 0.9;
     pointer-events: none;
     z-index: 1;
