@@ -1,0 +1,101 @@
+<h2>首页视觉方向对比</h2>
+<p class="subtitle">都保留现有内容与入口，只比较首页的组织方式和视觉语气。你刚才选的是内容优先路线，所以三个方案都控制了手绘元素的分量。</p>
+
+<div class="cards">
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="mockup">
+        <div class="mockup-header">A. 杂志型首页</div>
+        <div class="mockup-body" style="background:linear-gradient(180deg,#fffdf8,#f7f3ec);padding:18px;border-radius:16px;min-height:320px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;font-size:12px;color:#8a7f73;">
+            <span>CJ's Blog</span>
+            <span>文章 / 每日资讯 / 归档 / 搜索 / 关于</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1.2fr .8fr;gap:14px;">
+            <div style="background:#fffaf2;border:1px solid #eadfce;border-radius:20px;padding:18px;box-shadow:0 8px 24px rgba(212,191,160,.18);">
+              <div style="width:74px;height:8px;border-radius:999px;background:#e6cfae;margin-bottom:14px;"></div>
+              <div style="font-size:26px;font-weight:700;color:#40372d;line-height:1.3;margin-bottom:10px;">清爽、安静，但更像一本正在更新的数字杂志</div>
+              <div style="font-size:13px;color:#6b6157;line-height:1.8;">自我介绍、精选内容和导航入口聚成一个首屏焦点区。</div>
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px;">
+                <div style="background:#fff;border:1px dashed #dfc8a9;border-radius:14px;padding:10px;font-size:12px;">文章</div>
+                <div style="background:#fff;border:1px dashed #dfc8a9;border-radius:14px;padding:10px;font-size:12px;">资讯</div>
+                <div style="background:#fff;border:1px dashed #dfc8a9;border-radius:14px;padding:10px;font-size:12px;">归档</div>
+                <div style="background:#fff;border:1px dashed #dfc8a9;border-radius:14px;padding:10px;font-size:12px;">搜索</div>
+                <div style="background:#fff;border:1px dashed #dfc8a9;border-radius:14px;padding:10px;font-size:12px;">关于</div>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              <div style="background:#f3eadf;border-radius:18px;padding:14px;min-height:112px;border:1px solid #e6d7c4;"></div>
+              <div style="background:#fff;border-radius:18px;padding:14px;min-height:160px;border:1px solid #eadfce;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>内容前置，像编辑精选页</h3>
+      <p>适合强化文章与资讯更新感，视觉成熟稳妥，手绘元素最轻。</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="mockup">
+        <div class="mockup-header">B. 轻手账首页</div>
+        <div class="mockup-body" style="background:linear-gradient(180deg,#fefcf7,#f3f8f3);padding:18px;border-radius:16px;min-height:320px;position:relative;overflow:hidden;">
+          <div style="position:absolute;right:16px;top:18px;width:72px;height:72px;border:2px solid #d9e7ce;border-radius:50%;opacity:.55;"></div>
+          <div style="position:absolute;left:18px;bottom:18px;width:96px;height:36px;border-bottom:3px wavy #d8c2a2;opacity:.75;"></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;font-size:12px;color:#7b8677;">
+            <span>CJ's Blog</span>
+            <span>五个入口 + icon</span>
+          </div>
+          <div style="background:#fffef9;border:1px solid #e4eadf;border-radius:22px;padding:18px 18px 16px;box-shadow:0 10px 26px rgba(178,198,170,.16);">
+            <div style="font-size:25px;font-weight:700;color:#334136;line-height:1.35;margin-bottom:8px;">像一页清新的研究笔记，轻盈但不过度装饰</div>
+            <div style="font-size:13px;color:#687066;line-height:1.8;margin-bottom:14px;">自我介绍区更有温度，手绘圆线、波浪线和便签感标签会更明显。</div>
+            <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;">
+              <div style="background:#f8fbf5;border:1px solid #dbe7d1;border-radius:16px;padding:11px 12px;">文章</div>
+              <div style="background:#fdf8ef;border:1px solid #eadfc7;border-radius:16px;padding:11px 12px;">每日资讯</div>
+              <div style="background:#fff;border:1px dashed #d6dfcf;border-radius:16px;padding:11px 12px;">归档</div>
+              <div style="background:#fff;border:1px dashed #d6dfcf;border-radius:16px;padding:11px 12px;">搜索 / 关于</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>个人表达更强，手绘感更明显</h3>
+      <p>更接近你给的参考气质，但如果控制不好，容易比正文更抢视线。</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="mockup">
+        <div class="mockup-header">C. 平衡型首页</div>
+        <div class="mockup-body" style="background:linear-gradient(180deg,#fffefb,#f5f7f2);padding:18px;border-radius:16px;min-height:320px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;font-size:12px;color:#7d796e;">
+            <span>CJ's Blog</span>
+            <span>顶栏导航保留</span>
+          </div>
+          <div style="background:#fffdf8;border:1px solid #ece3d2;border-radius:24px;padding:18px 18px 14px;position:relative;box-shadow:0 12px 28px rgba(204,190,160,.14);margin-bottom:14px;">
+            <div style="position:absolute;right:16px;top:16px;width:58px;height:58px;border:2px dashed #d5e1cb;border-radius:18px;transform:rotate(8deg);opacity:.75;"></div>
+            <div style="width:88px;height:10px;border-radius:999px;background:#dbe8d0;margin-bottom:12px;"></div>
+            <div style="font-size:26px;font-weight:700;color:#3d3a31;line-height:1.32;max-width:76%;margin-bottom:10px;">内容可读性为主，手绘只是点到为止</div>
+            <div style="font-size:13px;color:#6a655d;line-height:1.8;">首屏保留自我介绍和站点气质，同时增加一组轻量入口面板，不做厚重卡片堆叠。</div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;">
+            <div style="background:#fff;border:1px solid #e7dccb;border-radius:16px;padding:10px 8px;text-align:center;font-size:12px;">文章</div>
+            <div style="background:#f7faf5;border:1px solid #dce7d3;border-radius:16px;padding:10px 8px;text-align:center;font-size:12px;">资讯</div>
+            <div style="background:#fff;border:1px solid #e7dccb;border-radius:16px;padding:10px 8px;text-align:center;font-size:12px;">归档</div>
+            <div style="background:#fff;border:1px solid #e7dccb;border-radius:16px;padding:10px 8px;text-align:center;font-size:12px;">搜索</div>
+            <div style="background:#fff;border:1px solid #e7dccb;border-radius:16px;padding:10px 8px;text-align:center;font-size:12px;">关于</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>最贴近你当前要求</h3>
+      <p>兼顾清新感、辨识度和阅读效率，适合作为整站统一语言继续往下扩展。</p>
+    </div>
+  </div>
+</div>

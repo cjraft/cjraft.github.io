@@ -2,7 +2,8 @@
 title: "关于本站"
 layout: "about"
 url: "/about/"
-summary: "about"
+showToc: false
+TocOpen: false
 ---
 
 ## 关于 Blog

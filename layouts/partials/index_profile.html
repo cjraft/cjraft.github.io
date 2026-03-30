@@ -1,0 +1,197 @@
+<div class="profile">
+    {{- with site.Params.profileMode }}
+    <div class="profile_inner">
+        <!-- 3D Voxel Dog Container -->
+        <div class="voxel-dog-wrapper">
+            <div id="voxel-dog-container" class="voxel-dog-container">
+                <div id="dog-spinner" class="dog-spinner">
+                    <div class="spinner"></div>
+                </div>
+            </div>
+        </div>
+        
+        <h1>{{ .title | default site.Title | markdownify }}</h1>
+        
+        <div class="profile-content">
+            <span>{{ .subtitle | markdownify }}</span>
+        </div>
+        
+        {{- partial "social_icons.html" -}}
+
+        {{- with .buttons }}
+        <div class="buttons-wrapper">
+            <!-- 橙色箭头 - 从自我介绍指向每日资讯 -->
+            <img src="/images/orange-arrow.svg" class="orange-arrow" alt="arrow" width="64" height="127">
+            
+            <div class="buttons">
+                {{- range . }}
+                <a class="button{{ if .class }} {{ .class }}{{ end }}" href="{{ trim .url " " }}" rel="noopener" title="{{ .name }}">
+                    <span class="button-inner">
+                        {{ .name }}
+                        {{- if (findRE "://" .url) }}&nbsp;
+                        <svg fill="none" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
+                            stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" height="14" width="14">
+                            <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path>
+                            <path d="M15 3h6v6"></path>
+                            <path d="M10 14L21 3"></path>
+                        </svg>
+                        {{- end }}
+                    </span>
+                </a>
+                {{- end }}
+            </div>
+        </div>
+        {{- end }}
+    </div>
+    {{- end}}
+</div>
+
+<!-- Load Voxel Dog Script -->
+<script src="/js/voxel-dog.js" defer></script>
+
+<style>
+/* 手绘装饰元素样式 */
+.hand-drawn-decoration {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.doodle-star {
+    position: absolute;
+    animation: twinkle 3s ease-in-out infinite;
+}
+
+.wavy-decoration {
+    position: absolute;
+    width: 100px;
+    height: 20px;
+    animation: float 4s ease-in-out infinite;
+}
+
+.dot-decoration {
+    position: absolute;
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; transform: scale(1) rotate(0deg); }
+    50% { opacity: 0.7; transform: scale(1.1) rotate(5deg); }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.2); }
+}
+
+.profile-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.profile-content span p {
+    margin: 16px 0;
+}
+
+.profile-content hr {
+    margin: 24px auto;
+    max-width: 150px;
+    border: none;
+    border-top: 2px dashed var(--border-light);
+}
+
+/* 3D Voxel Dog Styles - Matching craftzdog's design */
+.voxel-dog-wrapper {
+    position: relative;
+    width: 100%;
+    margin: 0 auto 24px;
+    display: flex;
+    justify-content: center;
+}
+
+.voxel-dog-container {
+    position: relative;
+    /* Matching original: w={[280, 480, 640]} h={[280, 480, 640]} */
+    width: 280px;
+    height: 280px;
+    margin-top: -20px;
+    margin-bottom: -40px;
+}
+
+@media (min-width: 768px) {
+    .voxel-dog-container {
+        width: 480px;
+        height: 480px;
+        margin-top: -60px;
+        margin-bottom: -140px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .voxel-dog-container {
+        width: 400px;
+        height: 400px;
+        margin-top: -40px;
+        margin-bottom: -80px;
+    }
+}
+
+.voxel-dog-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+    outline: none;
+}
+
+.dog-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid var(--border-light);
+    border-top-color: var(--coral);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* 按钮和箭头容器 */
+.buttons-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* 橙色箭头样式 */
+.orange-arrow {
+    position: absolute;
+    right: -20px;
+    top: -110px;
+    width: 64px;
+    height: 127px;
+    transform: rotate(-15deg);
+    opacity: 0.9;
+    pointer-events: none;
+    z-index: 1;
+}
+
+@media (max-width: 768px) {
+    .orange-arrow {
+        display: none;
+    }
+}
+</style>

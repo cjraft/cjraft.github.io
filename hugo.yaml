@@ -51,17 +51,27 @@ params:
     appleTouchIcon: "/apple-touch-icon.png"
 
   # 首页模式：profile（个人介绍）
-  homeInfoParams:
-    Content: |
-      嗨，我是 CJ 👋
+  profileMode:
+    enabled: true
+    title: "嗨，我是 CJ 👋"
+    subtitle: |
 
-      ---
-
-      当模型给出一个很好的答案，那是推理，还是记忆？当一个产品让人感动，那是设计，还是艺术？时刻保持好奇心，将沿途看到的东西记录下来， 在进化飞快的世界中让自己保持良好的节奏。
+      时刻保持好奇心，将沿途看到的东西记录下来，在进化飞快的世界中让自己保持良好的节奏。
 
       ---
 
       关于 AI 的边界在哪，关于认知是怎么被重塑的，偶尔也聊聊那些让我觉得「啊，原来如此」的瞬间。
+    imageUrl: "/images/avatar.png"
+    imageWidth: 120
+    imageHeight: 120
+    imageTitle: "CJ"
+    buttons:
+      - name: "✨ 浏览文章"
+        url: "/articles/"
+      - name: "📰 每日资讯"
+        url: "/news/"
+      - name: "🔍 搜索"
+        url: "/search/"
 
   socialIcons:
     - name: github
@@ -90,22 +100,18 @@ menu:
       name: "每日资讯"
       url: /news/
       weight: 30
-    - identifier: tags
-      name: "标签"
-      url: /tags/
-      weight: 40
     - identifier: archives
       name: "归档"
       url: /archives/
-      weight: 50
+      weight: 40
     - identifier: search
       name: "搜索"
       url: /search/
-      weight: 60
+      weight: 50
     - identifier: about
       name: "关于"
       url: /about/
-      weight: 70
+      weight: 60
 
 outputs:
   home:
