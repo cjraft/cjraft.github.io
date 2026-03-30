@@ -28,6 +28,10 @@ params:
   defaultTheme: auto
   disableThemeToggle: false
 
+  analytics:
+    ga4:
+      measurementId: "G-7F4V2V6VM4"
+
   ShowReadingTime: true
   ShowShareButtons: false
   ShowPostNavLinks: true

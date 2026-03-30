@@ -9,7 +9,13 @@
     {{- $rss = (.Parent.OutputFormats.Get "rss") }}
     {{- end }}
     {{- with $rss }}
-    <a href="{{ .RelPermalink }}" title="RSS" aria-label="RSS">
+    <a
+      href="{{ .RelPermalink }}"
+      title="RSS"
+      aria-label="RSS"
+      data-analytics-event="rss_click"
+      data-analytics-rss-source="archives_header"
+      data-analytics-rss-url="{{ .RelPermalink }}">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
         stroke-linecap="round" stroke-linejoin="round" height="23">
         <path d="M4 11a9 9 0 0 1 9 9" />
@@ -69,7 +75,14 @@
         <div class="archive-meta">
           {{- partial "post_meta.html" . -}}
         </div>
-        <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .RelPermalink }}"></a>
+        <a
+          class="entry-link"
+          aria-label="post link to {{ .Title | plainify }}"
+          href="{{ .RelPermalink }}"
+          data-analytics-event="post_click"
+          data-analytics-post-title="{{ .Title | plainify }}"
+          data-analytics-post-url="{{ .RelPermalink }}"
+          data-analytics-post-source="archives"></a>
       </div>
       {{- end }}
       {{- end }}

@@ -43,7 +43,13 @@
           <div class="timeline-dot"></div>
           <div class="timeline-date">{{ .Date.Format "01/02" }}</div>
           <div class="timeline-body">
-            <a class="timeline-title" href="{{ .RelPermalink }}">{{ .Title }}</a>
+            <a
+              class="timeline-title"
+              href="{{ .RelPermalink }}"
+              data-analytics-event="post_click"
+              data-analytics-post-title="{{ .Title | plainify }}"
+              data-analytics-post-url="{{ .RelPermalink }}"
+              data-analytics-post-source="news_timeline">{{ .Title }}</a>
             {{- if .Description }}
             <p class="timeline-desc">{{ .Description | plainify }}</p>
             {{- else if .Summary }}
