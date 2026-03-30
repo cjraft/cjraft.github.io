@@ -67,14 +67,17 @@
       const scW = this.container.clientWidth;
       const scH = this.container.clientHeight;
 
-      // Create renderer with original settings
+      // Create renderer with alpha background
       const renderer = new THREE.WebGLRenderer({
         antialias: true,
         alpha: true
       });
-      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setClearColor(0x000000, 0); // Transparent background
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       renderer.setSize(scW, scH);
       renderer.outputEncoding = THREE.sRGBEncoding;
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.0;
       this.container.appendChild(renderer.domElement);
       this.refRenderer = renderer;
 
@@ -94,9 +97,19 @@
       camera.position.copy(this.initialCameraPosition);
       camera.lookAt(this.target);
 
-      // Ambient light from original
-      const ambientLight = new THREE.AmbientLight(0xcccccc, Math.PI);
+      // Ambient light - reduced intensity to prevent overexposure
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
       scene.add(ambientLight);
+
+      // Add directional light for better shading
+      const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+      dirLight.position.set(10, 20, 10);
+      scene.add(dirLight);
+
+      // Add fill light from opposite side
+      const fillLight = new THREE.DirectionalLight(0xffecd1, 0.4);
+      fillLight.position.set(-10, 10, -10);
+      scene.add(fillLight);
 
       // OrbitControls from original
       const controls = new THREE.OrbitControls(camera, renderer.domElement);
