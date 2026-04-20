@@ -20,6 +20,7 @@ pagination:
 
 params:
   env: production
+  mainSections: ["articles"]
   title: "CJ's Blog"
   description: "关于 AI 的技术、资讯与思考。AI 动的是认知本身，值得认真对待。"
   keywords: [AI, 人工智能, ChatGPT, Claude, Prompt, LLM, RAG, Agent, MCP]
