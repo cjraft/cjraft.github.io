@@ -1,5 +1,5 @@
 ---
-title: "Caveman-努力在 PE 优化的路上"
+title: "Token Optimization By Caveman"
 date: 2026-04-08
 tags:
   - "AI"
@@ -15,9 +15,9 @@ cover:
   relative: false
 ---
 
-最近在 GitHub 上看到叫 Caveman 的项目，简单来说，它能让 AI 用"原始人式"的极简语言来交流，目前给出的数据还挺惊人的——平均能节省 65% 的输出 token 和 45% 的输入 token， 那现在来看下它到底做了些什么。
+最近 GitHub 看到好几个关注 token 压缩的项目， 比如 rtk、 caveman， 前者通过代理模式对 tool 输出进行自动压缩， 后者通过纯 PE 手段进行 output token 压缩。
 
-> 本文是对 [Caveman](https://github.com/JuliusBrussee/caveman) 开源项目的调研，了解其 token 压缩的方式
+> 本文仅关注 [Caveman](https://github.com/JuliusBrussee/caveman) 开源项目的调研，了解其 token 压缩的方式
 
 ## 一、项目概述
 
@@ -29,7 +29,7 @@ cover:
 
 ### 1.1 项目定位
 
-Caveman 是一个 AI 代理沟通优化工具，通过让 LLM（大语言模型）以"原始人式极简语言"（caveman-speak）进行交流，实现显著的 token 节省。该项目包含两个核心组件：
+简单来说，它能让 AI 用"原始人式"的极简语言（caveman-speak）来交流，目前给出的数据还挺惊人的——平均能节省 65% 的输出 token 和 45% 的输入 token。 该项目包含两个核心组件：
 
 1. **caveman skill** —— 压缩 AI 输出，减少约 65% 的输出 token
 2. **caveman-compress** —— 压缩记忆文件，减少约 45% 的输入 token
