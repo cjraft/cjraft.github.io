@@ -8,7 +8,11 @@ tags:
   - "Anthropic"
   - "LLM"
 showToc: true
-TocOpen: false
+TocOpen: true
+description:
+  Anthropic 官方提示工程最佳实践的中文整理，涵盖上下文工程、Chain of Thought、Few-Shot
+  等核心技巧，帮助开发者显著提升 Claude 输出质量。
+lastmod: "2025-11-20"
 ---
 
 这篇文章整理自 Anthropic 官方博客《[Best practices for prompt engineering](https://claude.com/blog/best-practices-for-prompt-engineering)》。原文发表于 2025 年 11 月 10 日，本文在保留原意的基础上做了中文整理和润色，便于直接阅读。

@@ -9,6 +9,9 @@ tags:
   - "Anthropic"
 showToc: true
 TocOpen: true
+description: MCP Apps Extension 生态深度解析：统一 MCP-UI 与 OpenAI Apps SDK 
+  的协议扩展方案，涵盖规范定义、多端支持与从标准到落地的完整实践。
+lastmod: '2026-03-14'
 ---
 
 ### MCP Apps

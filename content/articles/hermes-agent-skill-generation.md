@@ -5,7 +5,10 @@ tags:
   - "Hermes"
   - "Nous Research"
 showToc: true
-TocOpen: false
+TocOpen: true
+description: Nous Research Hermes Agent Skills 自生成机制研究报告：自动 Skill
+  生成的技术架构、训练方法与实验结果的深度分析。
+lastmod: "2026-04-23"
 ---
 
 ## 一、概述

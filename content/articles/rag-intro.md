@@ -13,6 +13,7 @@ cover:
   caption: "由 Tiny Stable Diffusion 生成"
 showToc: true
 TocOpen: true
+lastmod: '2026-02-20'
 ---
 
 RAG（Retrieval-Augmented Generation，检索增强生成）解决的是一个很实际的问题：大模型的知识有训练截止日期，不知道你公司内部的文档，也可能"一本正经地胡说"。

@@ -8,6 +8,9 @@ tags:
   - "前端协议"
 showToc: true
 TocOpen: true
+description: AG-UI 与 A2UI 协议横向对比：从核心定位、传输机制到生态支持的全方位分析，帮助开发者理解 Agent UI 
+  领域的协议选型策略。
+lastmod: '2026-01-30'
 ---
 
 **讨论背景**：从 A2UI 和 AG-UI 的基本概念对比开始，逐步深入到 AG-UI 的协议细节、使用方式、与 A2UI / MCP Apps 的集成支持。

@@ -8,6 +8,8 @@ tags:
   - "MCP"
 showToc: true
 TocOpen: true
+description: Claude Cowork 桌面 AI 代理深度评测：多用户协作、代码审查、项目管理等场景的实际体验，以及日常使用中的技巧与局限分析。
+lastmod: '2026-01-15'
 ---
 
 ## 摘要

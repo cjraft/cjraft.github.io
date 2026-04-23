@@ -13,6 +13,7 @@ cover:
   caption: "由本文介绍的方案生成"
 showToc: true
 TocOpen: true
+lastmod: '2026-03-05'
 ---
 
 AI 生成的图片有个公认的死穴——**文字**。无论是 Stable Diffusion、DALL-E 还是 Midjourney，生成的文字几乎不可用：乱码、拼写错误、字母变形，根本原因是扩散模型的"文字生成"本质是像素预测，没有字形约束。

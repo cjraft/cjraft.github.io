@@ -8,6 +8,9 @@ tags:
   - "前端协议"
 showToc: true
 TocOpen: true
+description: Google 开源的 A2UI（Agent-to-User Interface）协议深度解析：声明式 UI 规范、JSON 
+  蓝图格式与跨平台渲染机制，探索 AI Agent 如何安全地描述交互界面。
+lastmod: '2026-01-29'
 ---
 
 _研究日期: 2026-01-29_

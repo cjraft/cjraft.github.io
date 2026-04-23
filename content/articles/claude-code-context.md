@@ -4,8 +4,12 @@ date: 2026-04-01
 tags:
   - "Claude Code"
   - "Context Engineering"
-showToc: false
-TocOpen: false
+showToc: true
+TocOpen: true
+description:
+  Claude Code 源码级分析：深入解读其上下文管理机制，包括上下文压缩策略、缓存优化与 session memory 复用，揭示
+  AI 编程助手如何处理大规模代码上下文。
+lastmod: "2026-04-01"
 ---
 
 > 本文源自 Claude Code 的 Query Loop 实现分析，研究其上下文治理策略并从中提炼关键策略

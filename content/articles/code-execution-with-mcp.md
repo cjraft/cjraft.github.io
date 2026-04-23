@@ -8,6 +8,8 @@ tags:
   - "Cloudflare"
 showToc: true
 TocOpen: true
+description: 基于 MCP 协议的代码安全执行方案：探讨沙箱隔离机制、权限模型设计，以及 LLM 驱动自动化测试的工程化实现路径。
+lastmod: '2026-03-06'
 ---
 
 ## 背景：MCP 工具调用的问题 {#背景}

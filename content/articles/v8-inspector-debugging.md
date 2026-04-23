@@ -8,6 +8,10 @@ tags:
   - "调试"
 showToc: true
 TocOpen: true
+description:
+  V8 Inspector 调试机制详解：基于 Chrome DevTools Protocol 的远程调试协议，覆盖
+  Node.js、Deno、Electron 等场景的调试原理与实践。
+lastmod: "2025-11-22"
 ---
 
 V8 Inspector，也常被称为 V8 Inspector Protocol，或理解为 Chrome DevTools Protocol 中与 V8 调试相关的那部分能力。它是 V8 JavaScript 引擎暴露给外部调试工具的标准调试接口。

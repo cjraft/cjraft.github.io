@@ -3,8 +3,10 @@ title: "Prompt Cache 技术 & 应用研究"
 date: 2026-02-02
 tags:
   - "Prompt Cache"
-showToc: false
-TocOpen: false
+showToc: true
+TocOpen: true
+description: Prompt Cache 技术深度研究：解析 LLM 上下文缓存的工作原理，探讨如何利用缓存机制减少重复计算，实现推理降本增效。
+lastmod: "2026-02-02"
 ---
 
 _研究范围：Anthropic、OpenAI、Google Gemini、月之暗面 Kimi、字节豆包、DeepSeek、开源实现（vLLM/SGLang）_

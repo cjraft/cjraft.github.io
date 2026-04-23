@@ -4,7 +4,9 @@ date: 2026-02-02
 tags:
   - "OpenClaw"
 showToc: true
-TocOpen: false
+TocOpen: true
+description: OpenClaw 开源个人 AI 智能体完全指南：本地优先架构、隐私保护机制、多渠道接入与持久化记忆功能的使用教程与最佳实践。
+lastmod: "2026-02-02"
 ---
 
 ## 快速认识

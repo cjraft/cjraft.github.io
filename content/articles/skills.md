@@ -6,7 +6,11 @@ tags:
   - "Claude Code"
   - "AI Agent"
 showToc: true
-TocOpen: false
+TocOpen: true
+description:
+  Agent Skills 从概念到实践的技术剖析：Skill 设计原则、自动触发机制与工程化实现指南，帮助开发者构建可复用的 AI
+  能力模块。
+lastmod: "2025-12-07"
 ---
 
 ## 一、前言

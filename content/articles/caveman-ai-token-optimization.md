@@ -6,13 +6,15 @@ tags:
   - "Token Optimization"
   - "Claude Code"
   - "Cost Reduction"
-showToc: false
-TocOpen: false
+showToc: true
+TocOpen: true
 cover:
   image: ""
   alt: "Caveman Token Optimization"
   caption: ""
   relative: false
+description: Token 优化实战指南：从 LLM 分词原理出发，讲解降低 API 调用成本的实用技巧，在保持输出质量的同时实现降本增效。
+lastmod: "2026-04-08"
 ---
 
 最近 GitHub 看到好几个关注 token 压缩的项目， 比如 rtk、 caveman， 前者通过代理模式对 tool 输出进行自动压缩， 后者通过纯 PE 手段进行 output token 压缩。

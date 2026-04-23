@@ -9,6 +9,9 @@ tags:
   - "AI Agent"
 showToc: true
 TocOpen: true
+description: AI 浏览器自动化工具全面对比：深入评测 Playwright、Puppeteer、Browser-use 
+  等主流方案的能力差异、适用场景与选型建议。
+lastmod: '2026-03-18'
 ---
 
 这篇文章主要对 `browser-use`、`Chrome DevTools MCP` 和 `agent-browser` 三类工具做一个并排分析，方便在不同场景下做选型。

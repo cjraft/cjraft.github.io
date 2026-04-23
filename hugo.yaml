@@ -30,11 +30,13 @@ params:
   disableThemeToggle: false
 
   analytics:
+    google:
+      SiteVerificationTag: "rOxpxuPLsVlVZZ6kMfstMbR8I8V5o0nBWNxs9bqHXrQ"
     ga4:
       measurementId: "G-7F4V2V6VM4"
 
   ShowReadingTime: true
-  ShowShareButtons: false
+  ShowShareButtons: true
   ShowPostNavLinks: true
   ShowBreadCrumbs: true
   ShowCodeCopyButtons: true

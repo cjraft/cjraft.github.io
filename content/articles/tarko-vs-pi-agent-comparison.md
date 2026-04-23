@@ -6,7 +6,9 @@ tags:
   - "TypeScript"
   - "开源"
 showToc: true
-TocOpen: false
+TocOpen: true
+description: "@tarko/agent 与 pi-mono 两款 Agent 框架的深度对比：架构设计、扩展能力与开发者体验的全方位评测与选型参考。"
+lastmod: "2026-03-24"
 ---
 
 ## 背景与生态定位

@@ -8,6 +8,8 @@ tags:
   - "AI Agent"
 showToc: true
 TocOpen: true
+description: Ralph Loop 迭代开发方法论详解：让 AI 自主完成开发全流程的闭环工作流，从需求分析到快速验证，提升软件工程效率。
+lastmod: '2026-01-30'
 ---
 
 > **一句话定义**：Ralph Loop 是一个"把 AI 放进 while true 里"的自主迭代开发技术——你定义终点，AI 自己跑，跑完为止。

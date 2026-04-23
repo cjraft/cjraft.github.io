@@ -6,8 +6,12 @@ tags:
   - "虚拟内存"
   - "操作系统"
   - "page fault"
-showToc: false
+showToc: true
 TocOpen: true
+description:
+  mmap 与虚拟内存技术解析：从操作系统底层原理出发，厘清内存映射、page fault、malloc 与 mmap
+  的关系，以及进程内存占用的真实机制。
+lastmod: "2026-03-20"
 ---
 
 饭后和同事散步，聊起最近看的 `sandbox snapshot`，然后讨论起 `mmap`。

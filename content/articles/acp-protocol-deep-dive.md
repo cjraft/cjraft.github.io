@@ -8,6 +8,9 @@ tags:
   - "LSP"
 showToc: true
 TocOpen: true
+description: ACP（Agent Communication Protocol）协议深度剖析：面向 Coding Agent 的 LSP 
+  式通信方案，解析协议设计、消息格式与多 Agent 协作的实现机制。
+lastmod: '2026-02-02'
 ---
 
 _研究日期：2026-02-02_
