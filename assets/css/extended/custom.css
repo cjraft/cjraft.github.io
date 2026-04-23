@@ -1362,3 +1362,100 @@ hr {
   box-shadow: var(--shadow-soft);
   border: 1px solid var(--border-soft);
 }
+
+
+/* ---------- 社交分享按钮品牌色 ---------- */
+.share-buttons {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+  gap: 10px;
+  list-style: none;
+  margin: 0;
+}
+
+.share-buttons li,
+.share-buttons a {
+  display: inline-flex;
+}
+
+.share-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  background: var(--cream-dark);
+  border: 1px solid var(--border-light);
+}
+
+.share-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* 品牌色定义 */
+.share-x {
+  color: #000000;
+}
+.share-wechat {
+  color: #07C160;
+}
+.share-linkedin {
+  color: #0A66C2;
+}
+.share-reddit {
+  color: #FF4500;
+}
+.share-facebook {
+  color: #1877F2;
+}
+.share-telegram {
+  color: #26A5E4;
+}
+
+/* Hover 效果：背景变品牌色，图标变白 */
+.share-x:hover {
+  background: #000000;
+  border-color: #000000;
+  color: #fff;
+  transform: translateY(-3px) scale(1.1);
+}
+.share-wechat:hover {
+  background: #07C160;
+  border-color: #07C160;
+  color: #fff;
+  transform: translateY(-3px) scale(1.1);
+}
+.share-linkedin:hover {
+  background: #0A66C2;
+  border-color: #0A66C2;
+  color: #fff;
+  transform: translateY(-3px) scale(1.1);
+}
+.share-reddit:hover {
+  background: #FF4500;
+  border-color: #FF4500;
+  color: #fff;
+  transform: translateY(-3px) scale(1.1);
+}
+.share-facebook:hover {
+  background: #1877F2;
+  border-color: #1877F2;
+  color: #fff;
+  transform: translateY(-3px) scale(1.1);
+}
+.share-telegram:hover {
+  background: #26A5E4;
+  border-color: #26A5E4;
+  color: #fff;
+  transform: translateY(-3px) scale(1.1);
+}
+
+/* 深色模式适配 */
+:root[data-theme="dark"] .share-btn {
+  background: var(--cream-dark);
+  border-color: var(--border-light);
+}
