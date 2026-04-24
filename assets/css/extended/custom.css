@@ -1459,3 +1459,263 @@ hr {
   background: var(--cream-dark);
   border-color: var(--border-light);
 }
+
+
+/* ========================================
+   侧边目录 (Desktop TOC Sidebar)
+   ======================================== */
+
+/* 布局容器 */
+.post-layout {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+.post-main {
+  flex: 1;
+  min-width: 0;
+}
+
+/* 桌面端侧边 TOC */
+.toc-desktop {
+  width: 260px;
+  flex-shrink: 0;
+  align-self: flex-start;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  padding: 20px;
+  background: var(--warm-white);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+}
+
+/* 桌面端才启用 sticky */
+@media screen and (min-width: 1025px) {
+  .toc-desktop {
+    position: sticky;
+    top: 90px;
+  }
+}
+
+.toc-desktop::-webkit-scrollbar {
+  width: 4px;
+}
+
+.toc-desktop::-webkit-scrollbar-thumb {
+  background: var(--border-light);
+  border-radius: 4px;
+}
+
+.toc-sidebar-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px dashed var(--border-light);
+  letter-spacing: 0.02em;
+}
+
+/* 目录导航 */
+.toc-desktop-nav {
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.toc-desktop-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.toc-desktop-nav ul ul {
+  padding-left: 14px;
+  margin-top: 4px;
+  position: relative;
+}
+
+.toc-desktop-nav ul ul::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 4px;
+  bottom: 4px;
+  width: 2px;
+  background: var(--border-light);
+  border-radius: 1px;
+}
+
+.toc-desktop-nav li {
+  margin-bottom: 6px;
+}
+
+.toc-desktop-nav li li {
+  margin-bottom: 4px;
+}
+
+.toc-desktop-nav a {
+  display: block;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  border-left: 2px solid transparent;
+  word-break: break-word;
+}
+
+.toc-desktop-nav a:hover {
+  color: var(--text-primary);
+  background: var(--cream-dark);
+}
+
+/* 当前阅读项高亮 */
+.toc-desktop-nav a.active {
+  color: var(--text-primary);
+  background: var(--cream-dark);
+  font-weight: 600;
+}
+
+/* 移动端 TOC（保留默认折叠面板） */
+.toc-mobile {
+  display: none;
+}
+
+/* 深色模式适配 */
+:root[data-theme="dark"] .toc-desktop {
+  background: var(--warm-white);
+  border-color: var(--border-soft);
+}
+
+:root[data-theme="dark"] .toc-desktop-nav a:hover {
+  background: var(--cream-dark);
+}
+
+/* ========================================
+   响应式：移动端恢复顶部目录
+   ======================================== */
+
+@media screen and (max-width: 1024px) {
+  .post-layout {
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .post-main {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .main {
+    padding: 24px 16px 60px;
+    max-width: 100%;
+  }
+
+  .post-single {
+    padding: 24px;
+    max-width: 100%;
+  }
+
+  .toc-desktop {
+    display: none;
+    position: static;
+    width: 0;
+    padding: 0;
+    border: none;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .toc-mobile {
+    display: block;
+    margin-bottom: var(--content-gap);
+  }
+
+  /* 移动端保持原 TOC 折叠面板样式 */
+  .toc-mobile .toc {
+    border: 1px solid var(--border);
+    background: var(--code-bg);
+    border-radius: var(--radius);
+    padding: 0.4em;
+  }
+
+  [data-theme="dark"] .toc-mobile .toc {
+    background: var(--entry);
+  }
+
+  .toc-mobile .toc details summary {
+    cursor: zoom-in;
+    margin-inline-start: 10px;
+    user-select: none;
+  }
+
+  .toc-mobile .toc details[open] summary {
+    cursor: zoom-out;
+  }
+
+  .toc-mobile .toc .details {
+    display: inline;
+    font-weight: 500;
+  }
+
+  .toc-mobile .toc .inner {
+    margin: 5px 20px;
+    padding: 0 10px;
+    opacity: 0.9;
+  }
+
+  .toc-mobile .toc li ul {
+    margin-inline-start: var(--gap);
+  }
+
+  .toc-mobile .toc summary:focus {
+    outline: 0;
+  }
+}
+
+
+/* ========================================
+   桌面端布局调整（适配侧边 TOC）
+   ======================================== */
+
+@media screen and (min-width: 1025px) {
+  .main {
+    max-width: 1360px;
+  }
+
+  .post-single {
+    padding: 32px 36px;
+  }
+}
+
+
+/* ========================================
+   移动端防横向溢出兜底
+   ======================================== */
+
+@media screen and (max-width: 1024px) {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+  .post-content {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+  }
+
+  .post-content table {
+    table-layout: fixed;
+    word-break: break-word;
+  }
+
+  .post-content pre {
+    max-width: 100%;
+  }
+}
