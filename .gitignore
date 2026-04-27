@@ -6,6 +6,7 @@ resources/_gen/
 .hugo_build.lock
 .scripts/*
 .kodo
+.env
 
 # agent tasks
 tasks

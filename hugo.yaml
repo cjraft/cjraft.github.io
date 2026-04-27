@@ -107,6 +107,10 @@ menu:
       name: "每日资讯"
       url: /news/
       weight: 30
+    - identifier: life
+      name: "生活"
+      url: /life/
+      weight: 35
     - identifier: archives
       name: "归档"
       url: /archives/

@@ -1,0 +1,488 @@
+{{- define "main" }}
+
+<style>
+  .gallery-page {
+    --gallery-bg: var(--theme, #f5f5f5);
+    position: relative;
+  }
+
+  .gallery-header {
+    text-align: center;
+    padding: 30px 20px 20px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .gallery-header h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .gallery-header p {
+    font-size: 1rem;
+    color: var(--secondary);
+    line-height: 1.6;
+  }
+
+  .gallery-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 20px 24px 0;
+    color: var(--secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+  }
+
+  .gallery-back:hover {
+    color: var(--primary);
+  }
+
+  .gallery-back svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* 照片堆叠效果核心样式 */
+  .photo-stack {
+    position: relative;
+    padding-bottom: 5vh;
+  }
+
+  .photo-item {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1200px;
+    padding: 2vh 0;
+    pointer-events: none;
+  }
+
+  .photo-item:first-child {
+    height: auto;
+    min-height: 70vh;
+    padding-top: 0;
+    align-items: flex-start;
+  }
+
+  .photo-item:first-child .photo-frame {
+    margin-top: 2vh;
+  }
+
+  .photo-frame {
+    position: relative;
+    pointer-events: auto;
+    transform: rotate(var(--rotate, 0deg)) scale(var(--scale, 1)) translateZ(0);
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow:
+      0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 20px 40px -5px rgba(0, 0, 0, 0.15),
+      0 40px 80px -10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    contain: paint;
+    backface-visibility: hidden;
+  }
+
+  .gallery-image {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 70vw;
+    max-height: 75vh;
+    object-fit: contain;
+    border-radius: 8px;
+    cursor: zoom-in;
+    transition: transform 0.3s ease;
+  }
+
+  .gallery-image.is-pending {
+    width: min(70vw, 960px);
+    height: min(58vh, 680px);
+    max-width: none;
+    max-height: none;
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.35)),
+      linear-gradient(90deg, rgba(79, 70, 229, 0.05), rgba(8, 145, 178, 0.08));
+    cursor: default;
+  }
+
+  .gallery-image.is-loading {
+    opacity: 0;
+  }
+
+  .gallery-image.is-ready {
+    opacity: 1;
+  }
+
+  .gallery-image.is-ready:hover {
+    transform: scale(1.02);
+  }
+
+  /* Lightbox */
+  .lightbox-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--theme);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    backdrop-filter: blur(16px) saturate(1.2);
+  }
+
+  .lightbox-overlay.active {
+    opacity: 0.97;
+    visibility: visible;
+  }
+
+  .lightbox-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 24px 24px;
+  }
+
+  .lightbox-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+    transform: scale(0.95);
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .lightbox-overlay.active .lightbox-img {
+    transform: scale(1);
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--tertiary);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    color: var(--primary);
+    transition: background 0.2s ease, transform 0.2s ease;
+    z-index: 1001;
+  }
+
+  .lightbox-close:hover {
+    background: var(--secondary);
+    transform: scale(1.1);
+  }
+
+  .lightbox-close svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* 暗色模式适配 */
+  [data-theme="dark"] .photo-frame {
+    box-shadow:
+      0 4px 6px -1px rgba(0, 0, 0, 0.3),
+      0 20px 40px -5px rgba(0, 0, 0, 0.4),
+      0 40px 80px -10px rgba(0, 0, 0, 0.3);
+  }
+
+  /* 滚动指示器 */
+  .scroll-hint {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: var(--secondary);
+    font-size: 0.8rem;
+    opacity: 0.7;
+    animation: bounce 2s infinite;
+    pointer-events: none;
+    z-index: 100;
+  }
+
+  .scroll-hint svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  @keyframes bounce {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+      transform: translateX(-50%) translateY(0);
+    }
+    40% {
+      transform: translateX(-50%) translateY(-8px);
+    }
+    60% {
+      transform: translateX(-50%) translateY(-4px);
+    }
+  }
+
+  .scroll-hint.hidden {
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+
+  @media (max-width: 768px) {
+    .gallery-header h1 {
+      font-size: 1.8rem;
+    }
+
+    .photo-frame {
+      box-shadow:
+        0 10px 24px -10px rgba(0, 0, 0, 0.18),
+        0 24px 50px -24px rgba(0, 0, 0, 0.16);
+    }
+
+    .gallery-image {
+      max-width: 85vw;
+      max-height: 50vh;
+    }
+
+    .gallery-image.is-pending {
+      width: 85vw;
+      height: 48vh;
+    }
+  }
+
+  @media (hover: none) and (pointer: coarse) {
+    .gallery-image.is-ready:hover {
+      transform: none;
+    }
+  }
+</style>
+
+<div class="gallery-page">
+  <a href="/life/" class="gallery-back">
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path d="M19 12H5M12 19l-7-7 7-7" />
+    </svg>
+    返回生活
+  </a>
+  <div class="gallery-header">
+    <h1>{{ .Title }}</h1>
+    {{- if .Description }}
+    <p>{{ .Description }}</p>
+    {{- end }}
+  </div>
+
+  <div class="photo-stack" id="photoStack">
+    {{- range $index, $photo := .Params.photos }} {{ $zIndex := add $index 1 }} {{- $previewSrc := $photo.preview | default $photo.thumb | default $photo.src }} {{- $fullSrc := $photo.original | default $photo.full | default $photo.src }} {{- $alt := $photo.caption | default $.Title }} {{- $isPriority := lt $index 1 }}
+    <div
+      class="photo-item"
+      style="z-index: {{ $zIndex }};"
+      data-index="{{ $index }}"
+    >
+      <div class="photo-frame">
+        <img
+          class="gallery-image{{ if not $isPriority }} is-pending{{ end }}"
+          {{- if $isPriority }}
+          src="{{ $previewSrc }}"
+          {{- else }}
+          src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+          data-src="{{ $previewSrc }}"
+          {{- end }}
+          data-full="{{ $fullSrc }}"
+          data-photo-index="{{ $index }}"
+          alt="{{ $alt }}"
+          loading="{{ if $isPriority }}eager{{ else }}lazy{{ end }}"
+          decoding="async"
+          fetchpriority="{{ if eq $index 0 }}high{{ else }}low{{ end }}"
+          {{- with $photo.width }}
+          width="{{ . }}"
+          {{- end }}
+          {{- with $photo.height }}
+          height="{{ . }}"
+          {{- end }}
+        />
+      </div>
+    </div>
+    {{- end }}
+  </div>
+
+  <div class="scroll-hint" id="scrollHint">
+    <span>向下滚动</span>
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path d="M12 5v14M19 12l-7 7-7-7" />
+    </svg>
+  </div>
+</div>
+
+<div class="lightbox-overlay" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose" aria-label="关闭预览">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M18 6L6 18M6 6l12 12" />
+    </svg>
+  </button>
+  <div class="lightbox-container">
+    <img class="lightbox-img" id="lightboxImg" src="" alt="" />
+  </div>
+</div>
+
+<script>
+  (function () {
+    const items = document.querySelectorAll(".photo-item");
+    const images = Array.from(document.querySelectorAll(".gallery-image"));
+    const rotations = [-5, -4, -2, 1, 3, 5, -3, 4];
+    const scales = [0.94, 0.97, 1.0, 0.95, 1.02, 0.93, 0.98, 1.01];
+
+    items.forEach((item, i) => {
+      const frame = item.querySelector(".photo-frame");
+      const rotate =
+        rotations[i % rotations.length] + (Math.random() - 0.5) * 3;
+      const scale = scales[i % scales.length] + (Math.random() - 0.5) * 0.03;
+      frame.style.setProperty("--rotate", rotate + "deg");
+      frame.style.setProperty("--scale", scale.toFixed(3));
+    });
+
+    function markImageReady(img) {
+      img.classList.remove("is-loading", "is-pending");
+      img.classList.add("is-ready");
+    }
+
+    function startImageLoad(img) {
+      if (!img || !img.dataset.src || img.dataset.loadingStarted === "true") {
+        return;
+      }
+
+      img.dataset.loadingStarted = "true";
+      img.classList.add("is-loading");
+      img.src = img.dataset.src;
+      delete img.dataset.src;
+    }
+
+    images.forEach((img) => {
+      if (img.complete && img.naturalWidth > 0) {
+        markImageReady(img);
+        return;
+      }
+
+      img.addEventListener("load", () => markImageReady(img), { once: true });
+    });
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) {
+              return;
+            }
+
+            const img = entry.target;
+            const index = Number(img.dataset.photoIndex || "-1");
+            startImageLoad(img);
+
+            if (index >= 0) {
+              startImageLoad(images[index + 1]);
+            }
+
+            observer.unobserve(img);
+          });
+        },
+        { rootMargin: "150% 0px" }
+      );
+
+      images.forEach((img) => {
+        if (img.dataset.src) {
+          observer.observe(img);
+        }
+      });
+    } else {
+      images.forEach((img) => startImageLoad(img));
+    }
+
+    const hint = document.getElementById("scrollHint");
+    let hinted = false;
+    function onScroll() {
+      if (!hinted && window.scrollY > 100) {
+        hinted = true;
+        hint.classList.add("hidden");
+        window.removeEventListener("scroll", onScroll);
+      }
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    // Lightbox
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightboxImg");
+    const lightboxClose = document.getElementById("lightboxClose");
+
+    document.getElementById("photoStack").addEventListener("click", (event) => {
+      const img = event.target.closest(".gallery-image");
+      if (!img || img.classList.contains("is-pending")) {
+        return;
+      }
+
+      lightboxImg.src = img.dataset.full || img.currentSrc || img.src;
+      lightboxImg.alt = img.alt;
+      lightbox.classList.add("active");
+      document.body.style.overflow = "hidden";
+    });
+
+    function closeLightbox() {
+      lightbox.classList.remove("active");
+      document.body.style.overflow = "";
+      setTimeout(() => {
+        lightboxImg.src = "";
+      }, 300);
+    }
+
+    lightboxClose.addEventListener("click", (e) => {
+      e.stopPropagation();
+      closeLightbox();
+    });
+
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && lightbox.classList.contains("active")) {
+        closeLightbox();
+      }
+    });
+  })();
+</script>
+
+{{- end }}
