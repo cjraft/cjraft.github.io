@@ -3,43 +3,76 @@
 <script type="module">
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
 
-  mermaid.initialize({
-    startOnLoad: false,
-    securityLevel: 'loose',
-    theme: document.documentElement.dataset.theme === 'dark' ? 'dark' : 'default',
-    fontFamily: 'inherit'
-  });
+  // Resolve the theme at render time so it always matches the *current* page
+  // theme (PaperMod flips data-theme after this module loads, and again on toggle).
+  const currentTheme = () =>
+    document.documentElement.dataset.theme === 'dark' ? 'dark' : 'default';
 
-  async function renderMermaid() {
+  // Containers we manage, each remembering its original source so we can
+  // re-render with a new theme when the user toggles dark/light.
+  const containers = [];
+
+  function configure() {
+    mermaid.initialize({
+      startOnLoad: false,
+      securityLevel: 'loose',
+      theme: currentTheme(),
+      look: 'handDrawn', // 手绘风格默认
+      fontFamily: 'inherit'
+    });
+  }
+
+  // Collect mermaid source blocks once, replacing each <pre> with a .mermaid div.
+  function collect() {
     const sourceBlocks = document.querySelectorAll('pre[data-mermaid="true"], pre code.language-mermaid');
-    if (!sourceBlocks.length) return;
-
-    const nodes = [];
     sourceBlocks.forEach((sourceBlock, index) => {
       const pre = sourceBlock.matches('pre') ? sourceBlock : sourceBlock.parentElement;
-      if (!pre || pre.dataset.mermaidProcessed === 'true') return;
+      if (!pre || pre.dataset.mermaidCollected === 'true') return;
+      pre.dataset.mermaidCollected = 'true';
 
       const container = document.createElement('div');
       container.className = 'mermaid';
       container.id = `mermaid-${index}`;
-      container.textContent = pre.textContent.trim();
+      const code = pre.textContent.trim();
+      container.dataset.mermaidSrc = code;
+      container.textContent = code;
 
       pre.replaceWith(container);
-      nodes.push(container);
-      container.dataset.mermaidProcessed = 'true';
+      containers.push(container);
     });
+  }
 
-    if (nodes.length) {
-      await mermaid.run({ nodes });
-    }
+  async function render() {
+    if (!containers.length) return;
+    configure();
+    // Reset each container back to its source so mermaid re-processes it.
+    containers.forEach((c) => {
+      c.textContent = c.dataset.mermaidSrc;
+      c.removeAttribute('data-processed');
+    });
+    await mermaid.run({ nodes: containers });
+  }
+
+  async function init() {
+    collect();
+    await render();
+
+    // Re-render on theme toggle so diagram colors track the page theme.
+    let last = currentTheme();
+    new MutationObserver(() => {
+      if (currentTheme() !== last) {
+        last = currentTheme();
+        render().catch(console.error);
+      }
+    }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
   }
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
-      renderMermaid().catch(console.error);
+      init().catch(console.error);
     }, { once: true });
   } else {
-    renderMermaid().catch(console.error);
+    init().catch(console.error);
   }
 </script>
 {{- end }}
