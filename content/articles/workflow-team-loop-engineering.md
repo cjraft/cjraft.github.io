@@ -1,5 +1,5 @@
 ---
-title: "Workflow、Team 与 Loop Engineering：多 Agent 编排的三层视角"
+title: "Workflow、Team 与 Loop Engineering"
 date: 2026-06-23
 tags:
   - "Claude Code"
