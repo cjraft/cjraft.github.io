@@ -11,7 +11,6 @@ showToc: true
 TocOpen: true
 description: 代码知识图谱的两条技术路线——tree-sitter 走语法级 AST 调用图，快而近似；LSP 驱动语言服务器做语义级解析，精确但重。拆解二者的原理、demo 与成本取舍，并结合一组代码定位实测指出：code graph 更像上下文压缩工具，省 token，却不必然提升定位准确率。
 lastmod: '2026-07-02'
-draft: true
 ---
 
 我最近连着刷到好几个「代码知识图谱 MCP」：codegraph、codebase-memory-mcp、GitNexus、Serena……宣传口径都差不多——把代码库建成图谱，让 coding agent 通过 MCP 直接查「谁调用了谁」，少 grep、少 read、省 token、定位更准。
