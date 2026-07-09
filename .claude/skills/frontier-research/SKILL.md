@@ -48,14 +48,20 @@ description: >-
 
 | 来源 | 入口 |
 |---|---|
+| Anthropic 工程博客 | `anthropic.com/engineering` |
+| Anthropic / Claude 博客 | `claude.com/blog`、`anthropic.com/news` |
+| Google Research | `research.google/blog` |
 | Google DeepMind | `deepmind.google/models`、`blog.google/technology/ai` |
-| OpenAI | `openai.com/news` |
-| Anthropic | `anthropic.com/news` |
+| OpenAI News | `openai.com/zh-Hans-CN/news`、`openai.com/news` |
+| OpenAI 开发者博客 | `developers.openai.com/blog` |
 | Meta AI | `ai.meta.com/blog` |
 | 阿里 Qwen | `qwenlm.github.io/blog` |
-| 字节 Seed / 即梦 / Seedream | `seed.bytedance.com` |
-| DeepSeek | `api-docs.deepseek.com`、官方公告 |
-| 可灵 Kling / 智谱 / MiniMax / 月之暗面 / 美团 LongCat | 各自官网 blog |
+| 字节 Seed / 即梦 / Seedream | `seed.bytedance.com/blog`、`seed.bytedance.com/research` |
+| 智谱 Z.ai / GLM | `zhipuai.cn/zh/research`、`z.ai/blog` |
+| MiniMax | `minimaxi.com/news`、`minimaxi.com/blog` |
+| 月之暗面 Moonshot / Kimi | `kimi.com/blog` |
+| 美团 LongCat | `longcat.chat/blog`、`tech.meituan.com/tags/longcat.html` |
+| 可灵 Kling / 快手 | 快手 `kling.kuaishou.com`、可灵官网 blog |
 | xAI / Mistral / Stability / 智源 BAAI | 官网 news/blog |
 
 WebSearch 兜底查法：`"<产品名>" release 2026`、`新模型 发布 2026年X月`、Hacker News（`news.ycombinator.com`）当周热帖。
