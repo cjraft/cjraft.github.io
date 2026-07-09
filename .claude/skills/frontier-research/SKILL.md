@@ -32,11 +32,18 @@ description: >-
 
 ---
 
-## ① 定期次
+## ① 定期次与时间窗
 
 - 文件名 = 期次日期：`content/research/YYYY-MM-DD.md`，`date` front matter 用同一天 `T10:00:00+08:00`。
-- 默认覆盖「近一周」的新进展；用户给了明确日期/范围就按其来。
-- 当前日期从环境获取，别硬编造；换算「上周 / 本周」为具体日期。
+- 当前日期从环境获取，别硬编造；期次日期默认取当前日期。
+- **寻源时间窗（硬约束）**：`(上一期日期, 当前日期]`——即从最新一篇已发布的前沿研究出具时间起，到当前时间为止，只收录落在这个区间内的新进展，避免和往期重复、也不漏。
+  - 取上一期日期：
+    ```bash
+    ls content/research/ | grep -E '^[0-9]{4}-[0-9]{2}-[0-9]{2}\.md$' | sort | tail -1
+    ```
+    文件名去掉 `.md` 即上一期日期；若目录为空（无往期），则退回「近一周」。
+  - 判定「落在窗内」：论文按 arXiv submit/更新日期，模型&产品按官方发布日期；卡在边界外的一律不收。
+  - 用户显式给了日期/范围时，以用户为准，覆盖上述默认窗。
 
 ## ② 寻源策略（没有飞书文档后的信息来源）
 
@@ -84,16 +91,32 @@ WebSearch 兜底查法：`"<产品名>" release 2026`、`新模型 发布 2026�
 
 > arXiv 单篇读原文：`arxiv.org/abs/<id>` 摘要页最省 token；需要方法细节再取 `arxiv.org/pdf/<id>`。有代码/项目页（github.io、GitHub）也一并收录。
 
+#### B'. 工程实践 / engineering-insight 类论文（重点补充）
+
+偏工程、能直接给出工程 insight 的 agent/AI 论文（如 `2607.06101 Agents That Teach` 提出 "Knowledge Debt"），
+**不在** `cs.CL/cs.LG` 的能力研究区，需要单独一条线去找：
+
+| 手段 | 具体做法 |
+|---|---|
+| 换 arXiv 分类 | `cs.SE`（软工，主战场）、`cs.HC`（开发者体验/人机协作）、`cs.DC`/`cs.OS`/`cs.DB`/`cs.PL`（系统/serving/基础设施）；列表页 `arxiv.org/list/cs.SE/recent`、`cs.HC/recent` |
+| 按框架词搜 | 摘要含 `"empirical study"`、`"in practice"`、`"case study"`、`"design principles"`、`"in production"`、`developer study`、`AI-assisted`、`agent workflow`；用 `export.arxiv.org/api/query` 组合 |
+| 认录用会议 | 被 ICSE / FSE / ASE / ISSTA（软工）或 OSDI / SOSP / NSDI / MLSys / EuroSys / USENIX ATC（系统）接收 = 工程相关性背书，摘要常写 "Accepted to …" |
+| 从业者渠道 | Hacker News（`hn.algolia.com` 搜 arxiv+agent/LLM 看讨论热度）、Latent Space / The Batch / Interconnects newsletter、各 AI 实验室工程博客（insight 有时是博客而非论文） |
+
+**判定 rubric（满足其一即是工程 insight）**：给出可复用的系统/工具；提炼设计原则/模式；有真实开发者/实证研究；讨论了生产环境的延迟/成本/失败模式；提出从业者能直接套用的概念。纯刷 benchmark 降权。
+
+> 注意：HuggingFace Daily Papers 对这类覆盖偏弱（偏模型能力），所以此类优先靠「换分类 + 认会议 + 从业者渠道」。收录时归入 `### LLM / Agent` 子类。
+
 ### 分类映射（务必对齐首期）
 
-- `### LLM / Agent`：语言模型、Agent、记忆、工具调用、GUI Agent、搜索。
+- `### LLM / Agent`：语言模型、Agent、记忆、工具调用、GUI Agent、搜索；**含工程实践类**（AI 辅助编程、agent 融入研发流程、系统/serving，见 B'）。
 - `### 图像`：文生图、图像编辑、数据集、扩散/流匹配训练方法。
 - `### 视频与世界模型`：视频生成/修复、world model、交互式世界、具身/机器人 VLA、评测基准。
 
 ## ③ 筛选与打分
 
 - **数量**：模型&产品 1~3 条；论文按子类共约 6~12 篇（宁精勿滥，"精选"不是全量搬运）。
-- **取舍**：优先「有明确动机 + 有横向对比数据 + 可落地」的工作；纯增量、无对比、营销稿降权。
+- **取舍**：优先「有明确动机 + 有横向对比数据 + 可落地」的工作；纯增量、无对比、营销稿降权。**例外**：工程实践类（B'）即便没有 benchmark 表，只要给出可复用系统/设计原则/生产经验/从业者概念，同样优先收录——它们的价值在 insight 而非刷点。
 - **打分**（沿用首期，1~5，写进每篇 meta 行）：
   - `实用性`：能否落地、复现门槛、对工程/产品的直接价值。
   - `创新性`：思路新颖度、是否跳出「堆数据/堆参数」。
