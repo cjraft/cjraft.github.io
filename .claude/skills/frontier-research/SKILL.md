@@ -3,10 +3,12 @@ name: frontier-research
 description: >-
   生成「前沿研究」栏目（content/research/）的周期性 AIGC 摘要文章。当用户说
   「出一期前沿研究 / 更新前沿研究 / 写一篇 AIGC 前沿摘要 / 前沿研究周报」时使用。
-  负责三件事：(1) 在没有现成信息源时，按既定寻源策略从公开渠道（HuggingFace Daily
-  Papers、arXiv、各家模型厂商官方博客）搜罗当期「模型&产品 + 论文」候选；
-  (2) 逐条 WebFetch 原始来源，做结构化简介与总结（核心动机 / 横向对比 / 优缺点）；
-  (3) 按固定格式写入 content/research/YYYY-MM-DD.md（纯文字、无图、带免责声明）。
+  栏目**专注于 AI / LLM / Agent / Harness 领域**（世界模型与具身作为延伸保留），
+  不覆盖纯图像生成、纯视频生成方向。负责三件事：(1) 在没有现成信息源时，按既定
+  寻源策略从公开渠道（HuggingFace Daily Papers、arXiv、各家模型厂商官方博客）搜罗
+  当期「模型&产品 + 论文」候选；(2) 逐条 WebFetch 原始来源，做结构化简介与总结
+  （核心动机 / 横向对比 / 优缺点）；(3) 按固定格式写入 content/research/YYYY-MM-DD.md
+  （纯文字、无图、带免责声明）。
 ---
 
 # frontier-research — 前沿研究栏目生成器
@@ -14,7 +16,12 @@ description: >-
 把「找前沿研究 → 读原文 → 结构化总结 → 写进博客栏目」这条流水线固化下来。
 栏目基础设施（`content/research/_index.md`、`layouts/research/list.html`、导航项）已建好，
 本 skill 只负责**持续产出每期文章**。首期范本见 `content/research/2026-07-05.md`，
-新文章必须与它保持同构。
+新文章必须与它保持同构（首期含「图像」子类，属栏目改版前的历史遗留，新文章不再收录）。
+
+> **栏目定位（硬约束）**：聚焦 **AI / LLM / Agent / Harness**。
+> 论文子类固定为 `LLM / Agent`、`Harness / 工程实践`、`世界模型与具身` 三类，
+> 且**重心在前两类**（AI/LLM/Agent/Harness 占大头）。**不寻源、不收录**纯图像生成/编辑、
+> 纯视频生成/修复类工作；世界模型、具身/机器人 VLA 作为「智能体在物理世界的延伸」保留。
 
 ## 触发条件
 
@@ -75,47 +82,50 @@ WebSearch 兜底查法：`"<产品名>" release 2026`、`新模型 发布 2026�
 
 ### B. 论文（学术界）
 
-按本栏目三个子类去找，**首选精选源**，再回 arXiv 拉原文：
+按本栏目子类去找，**首选精选源**，再回 arXiv 拉原文。**寻源重心放在 LLM / Agent 与 Harness / 工程实践**，世界模型与具身作为补充：
 
 | 精选源（先看这里） | 说明 |
 |---|---|
-| **HuggingFace Daily Papers** | `huggingface.co/papers`，可加 `?date=YYYY-MM-DD`；有摘要与社区投票，是最省事的当期精选 |
+| **HuggingFace Daily Papers** | `huggingface.co/papers`，可加 `?date=YYYY-MM-DD`；有摘要与社区投票，是最省事的当期精选。**注意过滤**：本栏目跳过纯图像/纯视频生成条目，只挑 LLM/Agent/Harness/世界模型 |
 | alphaXiv Trending | `alphaxiv.org` 热度榜 |
 | X/社媒 讨论热帖 | WebSearch `arxiv <关键词> 2026` |
 
 | arXiv 分类（回源读原文） | 对应本栏目子类 |
 |---|---|
-| `arxiv.org/list/cs.CL/recent`、`cs.AI` | **LLM / Agent** |
-| `arxiv.org/list/cs.CV/recent` | **图像**（生成/编辑）、部分**视频** |
-| `cs.CV` + `cs.RO`（robotics）+ `cs.LG` | **视频与世界模型**（world model / 具身 / VLA） |
+| `arxiv.org/list/cs.CL/recent`、`cs.AI` | **LLM / Agent**（语言模型、Agent、记忆、工具调用、GUI Agent、搜索、RL/后训练、推理） |
+| `cs.SE`、`cs.HC`、`cs.DC`/`cs.OS`/`cs.DB`/`cs.PL` | **Harness / 工程实践**（见 B'） |
+| `cs.RO`（robotics）+ `cs.CV`/`cs.LG` 中的 world model / 具身 / VLA | **世界模型与具身**（补充，非重心） |
 
 > arXiv 单篇读原文：`arxiv.org/abs/<id>` 摘要页最省 token；需要方法细节再取 `arxiv.org/pdf/<id>`。有代码/项目页（github.io、GitHub）也一并收录。
+> **不收**：纯文生图/图像编辑/图像数据集、纯视频生成/修复/扩散训练方法——这些不属于本栏目范围。世界模型即便以视频为建模载体，只要落点在「世界状态/交互/具身控制」即可收。
 
-#### B'. 工程实践 / engineering-insight 类论文（重点补充）
+#### B'. Harness / 工程实践类论文（本栏目重心之一）
 
-偏工程、能直接给出工程 insight 的 agent/AI 论文（如 `2607.06101 Agents That Teach` 提出 "Knowledge Debt"），
-**不在** `cs.CL/cs.LG` 的能力研究区，需要单独一条线去找：
+偏工程、能直接给出工程 insight 的 agent/AI/harness 论文（如 `2607.06101 Agents That Teach` 提出 "Knowledge Debt"），
+**不在** `cs.CL/cs.LG` 的能力研究区，需要单独一条线去找。这条线与 LLM/Agent 并列为栏目重心，
+尤其关注 **harness / scaffold / agent 运行时**（工具编排、上下文管理、记忆、评测框架、AI 辅助研发流程）：
 
 | 手段 | 具体做法 |
 |---|---|
 | 换 arXiv 分类 | `cs.SE`（软工，主战场）、`cs.HC`（开发者体验/人机协作）、`cs.DC`/`cs.OS`/`cs.DB`/`cs.PL`（系统/serving/基础设施）；列表页 `arxiv.org/list/cs.SE/recent`、`cs.HC/recent` |
-| 按框架词搜 | 摘要含 `"empirical study"`、`"in practice"`、`"case study"`、`"design principles"`、`"in production"`、`developer study`、`AI-assisted`、`agent workflow`；用 `export.arxiv.org/api/query` 组合 |
+| 按框架词搜 | 摘要含 `"empirical study"`、`"in practice"`、`"case study"`、`"design principles"`、`"in production"`、`developer study`、`AI-assisted`、`agent workflow`、`harness`、`scaffold`；用 `export.arxiv.org/api/query` 组合 |
 | 认录用会议 | 被 ICSE / FSE / ASE / ISSTA（软工）或 OSDI / SOSP / NSDI / MLSys / EuroSys / USENIX ATC（系统）接收 = 工程相关性背书，摘要常写 "Accepted to …" |
 | 从业者渠道 | Hacker News（`hn.algolia.com` 搜 arxiv+agent/LLM 看讨论热度）、Latent Space / The Batch / Interconnects newsletter、各 AI 实验室工程博客（insight 有时是博客而非论文） |
 
-**判定 rubric（满足其一即是工程 insight）**：给出可复用的系统/工具；提炼设计原则/模式；有真实开发者/实证研究；讨论了生产环境的延迟/成本/失败模式；提出从业者能直接套用的概念。纯刷 benchmark 降权。
+**判定 rubric（满足其一即是工程 insight）**：给出可复用的系统/工具/harness；提炼设计原则/模式；有真实开发者/实证研究；讨论了生产环境的延迟/成本/失败模式；提出从业者能直接套用的概念。纯刷 benchmark 降权。
 
-> 注意：HuggingFace Daily Papers 对这类覆盖偏弱（偏模型能力），所以此类优先靠「换分类 + 认会议 + 从业者渠道」。收录时归入 `### LLM / Agent` 子类。
+> 注意：HuggingFace Daily Papers 对这类覆盖偏弱（偏模型能力），所以此类优先靠「换分类 + 认会议 + 从业者渠道」。收录时归入 `### Harness / 工程实践` 子类。
 
-### 分类映射（务必对齐首期）
+### 分类映射（三子类，重心在前两类）
 
-- `### LLM / Agent`：语言模型、Agent、记忆、工具调用、GUI Agent、搜索；**含工程实践类**（AI 辅助编程、agent 融入研发流程、系统/serving，见 B'）。
-- `### 图像`：文生图、图像编辑、数据集、扩散/流匹配训练方法。
-- `### 视频与世界模型`：视频生成/修复、world model、交互式世界、具身/机器人 VLA、评测基准。
+- `### LLM / Agent`（重心）：语言模型、Agent、记忆、工具调用、GUI Agent、搜索、RL/后训练、推理/serving 能力研究。
+- `### Harness / 工程实践`（重心）：AI 辅助编程、agent 融入研发流程、harness/scaffold/agent 运行时、工具链、系统基础设施、开发者实证研究（见 B'）。
+- `### 世界模型与具身`（补充）：world model、交互式世界、具身/机器人 VLA、相关评测基准。**不含**纯视频生成/修复。
+- ~~`### 图像`~~：**已废弃**，纯图像生成/编辑不再收录（首期遗留，勿沿用）。
 
 ## ③ 筛选与打分
 
-- **数量**：模型&产品 1~3 条；论文按子类共约 6~12 篇（宁精勿滥，"精选"不是全量搬运）。
+- **数量与配比**：模型&产品 1~3 条；论文共约 6~12 篇，**重心在 LLM / Agent 与 Harness / 工程实践两类（合计占约 2/3 及以上）**，世界模型与具身作补充（约 1/4，宁缺毋滥）。宁精勿滥，"精选"不是全量搬运。
 - **取舍**：优先「有明确动机 + 有横向对比数据 + 可落地」的工作；纯增量、无对比、营销稿降权。**例外**：工程实践类（B'）即便没有 benchmark 表，只要给出可复用系统/设计原则/生产经验/从业者概念，同样优先收录——它们的价值在 insight 而非刷点。
 - **打分**（沿用首期，1~5，写进每篇 meta 行）：
   - `实用性`：能否落地、复现门槛、对工程/产品的直接价值。
@@ -176,19 +186,21 @@ TocOpen: true
 **优点**：...
 **缺点**：...
 
-### 图像
+### Harness / 工程实践
 （同上）
 
-### 视频与世界模型
+### 世界模型与具身
 （同上）
 ```
+
+> 子类固定这三类，缺某类就省略该 `###`；**不再出现「图像」「视频」子类**。
 
 
 ### 硬性格式约定
 
 - **纯文字、无图**：绝不插入图片（尤其不要外站鉴权/防盗链图床链接）。写完 `grep -c 'internal-api-drive-stream\|!\[' content/research/<file>` 应为 0。
 - 中英文之间留空格（`Nano Banana 2 Lite` 前后、`Qwen3-VL` 等术语）。
-- 标题层级只用 `##` / `###` / `####`；子类固定用「LLM / Agent」「图像」「视频与世界模型」，缺某类就省略该 `###`。
+- 标题层级只用 `##` / `###` / `####`；子类固定用「LLM / Agent」「Harness / 工程实践」「世界模型与具身」，缺某类就省略该 `###`；不再使用「图像」「视频」子类。
 - 链接用 `<https://...>` 尖括号或 `[名](url)`，保证可点。
 - 遵循博客写法：聚焦流程与结论、不挂 file:line（见 memory `blog-no-line-number-refs`）。
 
