@@ -103,6 +103,10 @@ menu:
       name: "文章"
       url: /articles/
       weight: 20
+    - identifier: research
+      name: "前沿研究"
+      url: /research/
+      weight: 25
     - identifier: news
       name: "每日资讯"
       url: /news/
