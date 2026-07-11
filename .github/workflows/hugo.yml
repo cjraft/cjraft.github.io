@@ -69,6 +69,43 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
+      # 需要上一版提交来 diff 出本次改动的文章，故检出最近两条历史
+      - name: Checkout (git history for IndexNow diff)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+      # IndexNow：只把本次新增/修改的内容页主动推给 Bing/Yandex（Google 不支持 IndexNow）
+      - name: Ping IndexNow with changed pages
+        env:
+          INDEXNOW_KEY: c55f95d1b0884f3bbe8bf914a7a7bc32
+          HOST: cjraft.github.io
+        run: |
+          # 首次提交没有父节点，无法 diff，直接跳过
+          if ! git rev-parse HEAD^ >/dev/null 2>&1; then
+            echo "no parent commit, skip"; exit 0
+          fi
+          # 本次提交里新增(A)/修改(M)的内容页 → 站点 URL
+          #   content/articles/foo.md   -> https://HOST/articles/foo/
+          #   content/research/x.md     -> https://HOST/research/x/
+          #   content/articles/_index.md-> https://HOST/articles/
+          #   content/about.md          -> https://HOST/about/
+          # 限定 content 目录再 grep .md，可同时覆盖子目录(含 research)与顶层单页
+          URLS=$(git diff --name-only --diff-filter=AM HEAD^ HEAD -- content \
+            | grep -E '\.md$' \
+            | sed -E 's#^content/##; s#\.md$##; s#/_index$##' \
+            | sed -E "s#^#https://${HOST}/#; s#\$#/#")
+          if [ -z "$URLS" ]; then
+            echo "no content page changes, skip"; exit 0
+          fi
+          echo "submitting to IndexNow:"; echo "$URLS"
+          BODY=$(jq -n \
+            --arg h "$HOST" \
+            --arg k "$INDEXNOW_KEY" \
+            --argjson u "$(printf '%s\n' "$URLS" | jq -R . | jq -s .)" \
+            '{host:$h, key:$k, keyLocation:("https://"+$h+"/"+$k+".txt"), urlList:$u}')
+          curl -sS -X POST "https://api.indexnow.org/indexnow" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -d "$BODY" -w "\nHTTP %{http_code}\n"
